@@ -3,6 +3,5 @@ coverage
 venv
 .idea
 __pycache__
-db*
-admin/.dbdata
+*/.dbdata
 migrations
