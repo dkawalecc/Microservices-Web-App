@@ -1,6 +1,8 @@
 import pika
 
-params = pika.URLParameters('amqps://jxguwpom:CKYuMeBMrcOF8Ba0UDNakdErtMtRxUA9@rattlesnake.rmq.cloudamqp.com/jxguwpom')
+# private mqqt key
+url_params = open('url_parameters.txt').read()
+params = pika.URLParameters(url_params)
 
 connection = pika.BlockingConnection(params)
 

@@ -5,3 +5,4 @@ venv
 __pycache__
 */.dbdata
 migrations
+url_parameters.txt
