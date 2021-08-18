@@ -1,3 +1,5 @@
+import json
+
 import pika
 
 # private mqqt key
@@ -9,17 +11,18 @@ connection = pika.BlockingConnection(params)
 
 channel = connection.channel()
 
-channel.queue_declare(queue='main')
+channel.queue_declare(queue='admin')
 
 
 def callback(channel, method, properties, body):
     print('Received in admin')
-    print(body.decode('utf-8'))
+    _id = json.loads(body)
+    print(_id)
 
 
 channel.basic_consume(queue='admin', on_message_callback=callback, auto_ack=True)
 
-print('started_consuming')
+print('started_consuming: admin')
 
 channel.start_consuming()
 
