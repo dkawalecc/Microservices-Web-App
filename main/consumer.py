@@ -1,10 +1,8 @@
-import json
+import json, pika
 
-import pika
-
-# private mqqt key
 from main import Product, db
 
+# private mqqt key
 url_params = open('/app/url_parameters.txt').read()
 # print(url_params)
 params = pika.URLParameters(url_params)
