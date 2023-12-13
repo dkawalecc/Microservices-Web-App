@@ -1,0 +1,1 @@
+amqps://jxguwpom:CKYuMeBMrcOF8Ba0UDNakdErtMtRxUA9@rattlesnake.rmq.cloudamqp.com/jxguwpom

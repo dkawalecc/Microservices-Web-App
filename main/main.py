@@ -1,7 +1,9 @@
 import sys
 from dataclasses import dataclass
 from flask import Flask, jsonify, abort
+# from flask.cli import FlaskGroup
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import UniqueConstraint
 import requests
@@ -12,8 +14,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@db/main'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
+# cli = FlaskGroup(app)
 
 db = SQLAlchemy(app)
+
+migrate = Migrate()
+migrate.init_app(app, db)
 
 
 @dataclass
@@ -53,7 +59,8 @@ def item(id):
 @app.route('/api/products/<int:id>/like', methods=['POST'])
 def like(id):
     try:
-        req = requests.get('http://docker.for.win.localhost:8000/api/user', timeout=0.1)
+        req = requests.get(
+            'http://docker.for.win.localhost:8000/api/user', timeout=0.1)
         json = req.json()
 
         try:
@@ -75,3 +82,4 @@ def like(id):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+    # cli()
